@@ -16,32 +16,29 @@ public class PongGame extends ApplicationAdapter {
 	OrthographicCamera cam;
 	SpriteBatch batch;
 	AssetManager assets;
-	Texture img, bg, ball;
+	Texture bg, ballTexture;
 	float delta;
 	final int WORLD_WIDTH = 100, WORLD_HEIGHT = 100;
 	boolean getAssets;
-	Ball_thingy ball1;
-
+	Matrix4 identity;
+	Ball_thingy ball;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
-		ball = new Texture("textures/ball.png"); // when i put this in the asset loader bit it gets angry
-
-		ball1 = new Ball_thingy(ball, 20, 30, 50,50,20,20);
-
 		assets = new AssetManager();
-		//assets.load("textures/badlogic.jpg", Texture.class);
 		assets.load("textures/bg.png", Texture.class);
-		//assets.load("textures/ball.png", Texture.class);
+		assets.load("textures/ball.png", Texture.class);
 		getAssets = true;
+
+		identity = new Matrix4();
 
 		cam = new OrthographicCamera();
 		view = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, cam); // Fixes the aspect ratio
 		view.apply(true);
-
 	}
+
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
@@ -52,7 +49,6 @@ public class PongGame extends ApplicationAdapter {
 	public void render () {
 		delta = Math.min(0.05f, Gdx.graphics.getDeltaTime()); // Time since the last frame
 		// Delta is clamped to a maximum of 0.05 seconds to avoid skipping too many frames ("jumps")
-
 
 		if(!assets.update(16)) {
 			ScreenUtils.clear(0, 0, 1, 1);
@@ -65,17 +61,14 @@ public class PongGame extends ApplicationAdapter {
 
 		if(getAssets) { // Only called once, right after asset loading finishes
 			getAssets = false;
-			//img = assets.get("textures/badlogic.jpg", Texture.class);
 			bg = assets.get("textures/bg.png", Texture.class);
-			//ball = assets.get("textures/ball.png", Texture.class);
+			ballTexture = assets.get("textures/ball.png", Texture.class);
+
+			ball = new Ball_thingy(ballTexture, 20, 30, 50,50,20,20);
 		}
 
-
-		//cam.rotate(45 * delta); // Simple camera test
-		cam.update(); // The camera must be updated after its properties have been changed in order for them to apply
-
 		// Draws a background texture to fill the viewport
-		batch.setProjectionMatrix(new Matrix4());
+		batch.setProjectionMatrix(identity);
 		batch.begin();
 		batch.draw(bg, -1, -1, 2, 2);
 		batch.end();
@@ -85,13 +78,11 @@ public class PongGame extends ApplicationAdapter {
 		 * batch.setProjectionMatrix((new Matrix4()).scl(1 / size);
 		 */
 		batch.begin();
-		//batch.draw(img, 0, 0, 40, 40);
-		ball1.draw_stuff(batch);
+		ball.draw_stuff(batch);
 		batch.end();
 
-
-		ball1.hit_stuff();
-		ball1.move_stuff(delta);
+		ball.hit_stuff();
+		ball.move_stuff(delta);
 
 	}
 	
@@ -99,6 +90,5 @@ public class PongGame extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		assets.dispose();
-		ball.dispose();
 	}
 }

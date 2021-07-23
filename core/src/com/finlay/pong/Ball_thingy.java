@@ -8,7 +8,7 @@ public class Ball_thingy {
     int ball_width, ball_height;
     Texture img;
 
-    public Ball_thingy(Texture texture, float xvel, float yvel, float xpos, float ypos, int ball_width, int ball_height){
+    public Ball_thingy(Texture texture, float xvel, float yvel, float xpos, float ypos, int ball_width, int ball_height) {
         this.img = texture;
         this.xvel = xvel;
         this.yvel = yvel;
@@ -18,18 +18,18 @@ public class Ball_thingy {
         this.ball_width = ball_width;
     }
 
-    public void move_stuff(float delta){
+    public void move_stuff(float delta) {
         xpos += xvel * delta;
         ypos += yvel * delta;
     }
 
-    public void hit_stuff(){
-        if(xpos+ball_width >= 100 || xpos <= 0 ){xvel = -xvel;}
-        if(ypos+ball_height >= 100 || ypos <= 0) {yvel = -yvel;}
+    public void hit_stuff() {
+        if(xpos + ball_width >= 100 || xpos <= 0 ) xvel = -xvel;
+        if(ypos + ball_height >= 100 || ypos <= 0) yvel = -yvel;
     }
 
-    public void draw_stuff(SpriteBatch batch){
-        batch.draw(img,xpos,ypos,ball_width,ball_height);
+    public void draw_stuff(SpriteBatch batch) {
+        batch.draw(img, xpos, ypos, ball_width, ball_height);
     }
 
 }
