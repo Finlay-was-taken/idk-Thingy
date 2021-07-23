@@ -1,7 +1,6 @@
 package com.finlay.pong.desktop;
 
 import com.badlogic.gdx.Files;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.finlay.pong.PongGame;
@@ -9,7 +8,7 @@ import com.finlay.pong.PongGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setTitle("Pong");
+		config.setTitle("Pong-thingy");
 		config.useVsync(true);
 		config.setForegroundFPS(60);
 		config.setIdleFPS(60);
