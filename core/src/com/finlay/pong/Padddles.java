@@ -19,10 +19,10 @@ public class Padddles {
         this.paddle_side = left;
     }
     public void update_shmupdate(float delta){
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) && pos.y + dimensions.y <= 100 && !paddle_side){vel = 30;}
-        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && pos.y >= 0 && !paddle_side){vel = -30;}
-        else if(Gdx.input.isKeyPressed(Input.Keys.W) && pos.y + dimensions.y <= 100 && paddle_side){vel = 30;}
-        else if (Gdx.input.isKeyPressed(Input.Keys.S) && pos.y >= 0 && paddle_side){vel = -30;}
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) && pos.y + dimensions.y <= 100 && !paddle_side)vel = 30;
+        else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && pos.y >= 0 && !paddle_side)vel = -30;
+        else if(Gdx.input.isKeyPressed(Input.Keys.W) && pos.y + dimensions.y <= 100 && paddle_side)vel = 30;
+        else if (Gdx.input.isKeyPressed(Input.Keys.S) && pos.y >= 0 && paddle_side)vel = -30;
         else vel = 0;
         pos.y += vel*delta;
 //        if(pos.y+dimensions.y>= 100 || pos.y<= 0)vel = 0;

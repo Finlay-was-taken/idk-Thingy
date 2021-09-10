@@ -32,7 +32,7 @@ public class PongGame extends ApplicationAdapter {
 
 		assets = new AssetManager();
 		assets.load("textures/bg.png", Texture.class);
-		assets.load("textures/ball.png", Texture.class);
+		assets.load("textures/newball.png", Texture.class);
 		assets.load("textures/paddle.png", Texture.class);
 		getAssets = true;
 
@@ -66,9 +66,9 @@ public class PongGame extends ApplicationAdapter {
 		if(getAssets) { // Only called once, right after asset loading finishes
 			getAssets = false;
 			bg = assets.get("textures/bg.png", Texture.class);
-			ballTexture = assets.get("textures/ball.png", Texture.class);
+			ballTexture = assets.get("textures/newball.png", Texture.class);
 			paddle = assets.get("textures/paddle.png", Texture.class);
-			ball = new Ball_thingy(ballTexture,new Vector2(50,30), new Vector2(50,50), 5);
+			ball = new Ball_thingy(ballTexture,new Vector2(40,50), new Vector2(50,50), 5);
 			paddle1 = new Padddles(paddle, new Vector2(0,35), new Vector2(5,30), true);
 			paddle2 = new Padddles(paddle, new Vector2(95,35), new Vector2(5,30), false);
 		}
@@ -89,7 +89,7 @@ public class PongGame extends ApplicationAdapter {
 		paddle2.draw_shmaw(batch);
 		batch.end();
 
-		ball.update_stuff(delta);
+		ball.update_stuff(delta, paddle1, paddle2);
 		paddle1.update_shmupdate(delta);
 		paddle2.update_shmupdate(delta);
 
